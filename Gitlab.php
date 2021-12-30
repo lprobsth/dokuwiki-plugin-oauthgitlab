@@ -74,7 +74,7 @@ class Gitlab extends AbstractOAuth2Base
         ];
 
         $this->httpClient->retrieveResponse(
-            new Uri($plugin->getConf('url').'oauth/revoke'),
+            new Uri($plugin->getConf('url').'/oauth/revoke'),
             $parameters,
             $this->getExtraOAuthHeaders()
         );
