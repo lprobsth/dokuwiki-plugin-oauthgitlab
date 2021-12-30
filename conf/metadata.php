@@ -5,6 +5,7 @@
  * @author Lukas Probsthain <lukas.probsthain@gmail.com>
  */
 
-
-//$meta['fixme'] = array('string');
-
+$meta['url'] = array('string');
+$meta['key'] = array('string');
+$meta['secret'] = ['password'];
+$meta['rules'] = array('string','_caution' => 'warning');
