@@ -8,4 +8,4 @@
 $meta['url'] = array('string');
 $meta['key'] = array('string');
 $meta['secret'] = ['password'];
-$meta['rules'] = array('string','_caution' => 'warning');
+$meta['rules'] = array('','_caution' => 'warning');
