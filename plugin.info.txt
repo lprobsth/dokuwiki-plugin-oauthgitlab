@@ -1,0 +1,7 @@
+base   oauthgitlab
+author Lukas Probsthain
+email  lukas.probsthain@gmail.com
+date   2021-12-30
+name   oauth GitLab Service
+desc   GitLab Service for use with the oAuth Plugin
+url    https://github.com/lprobsth/dokuwiki-plugin-oauthgitlab
