@@ -1,6 +1,7 @@
 <?php
 
 use dokuwiki\plugin\oauth\Adapter;
+use dokuwiki\plugin\oauthgitlab\Gitlab;
 
 /**
  * Service Implementation for oAuth GitLab authentication
@@ -10,6 +11,11 @@ use dokuwiki\plugin\oauth\Adapter;
  */
 class action_plugin_oauthgitlab extends \dokuwiki\plugin\oauth\Adapter
 {
+    /** @inheritdoc */
+    public function registerServiceClass()
+    {
+        return Gitlab::class;
+    }
 
     protected $gitlabUserData = null;
     
