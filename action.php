@@ -172,5 +172,16 @@ class action_plugin_oauthgitlab extends \dokuwiki\plugin\oauth\Adapter
         
         return $this->checkMatchRules();
     }
+
+    /**
+     * @inheritdoc
+     * @throws \OAuth\Common\Exception\Exception
+     */
+    public function logout()
+    {
+        /** @var Gitlab */
+        $oauth = $this->getOAuthService();
+        $oauth->logout();
+    }
 }
 
