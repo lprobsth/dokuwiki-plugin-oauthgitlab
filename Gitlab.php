@@ -63,6 +63,8 @@ class Gitlab extends AbstractOAuth2Base
      */
     public function logout()
     {
+        global $ID;
+
         $plugin = plugin_load('helper', 'oauthgitlab');
 
         $token = $this->getStorage()->retrieveAccessToken($this->service());
@@ -70,7 +72,7 @@ class Gitlab extends AbstractOAuth2Base
         $parameters = [
             'client_id' => $this->credentials->getConsumerId(),
             'client_secret' => $this->credentials->getConsumerSecret(),
-            'token' => $token,
+            'token' => $token
         ];
 
         $this->httpClient->retrieveResponse(
@@ -78,5 +80,8 @@ class Gitlab extends AbstractOAuth2Base
             $parameters,
             $this->getExtraOAuthHeaders()
         );
+
+        $parameters = array();
+        send_redirect(wl($ID, $parameters, true, '&'));
     }
 }
