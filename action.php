@@ -40,7 +40,7 @@ class action_plugin_oauthgitlab extends \dokuwiki\plugin\oauth\Adapter
     /** @inheritDoc */
     public function getScopes()
     {
-        return array('read_user');
+        return array('read_user','api');
     }
 
     /** @inheritDoc */
