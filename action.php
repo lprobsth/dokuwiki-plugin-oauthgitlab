@@ -119,7 +119,7 @@ class action_plugin_oauthgitlab extends \dokuwiki\plugin\oauth\Adapter
             }
             
             // ns/key/subkey/subsubkey.. [ (!=|=) value ]
-            if (!preg_match('#^\s*([a-z-_]+)/([a-z-_/]+)\s*(?:(!?=)\s*(.+))?$#i', $rule, $match)) {
+            if (!preg_match('#^\s*([a-z-_]+)/([a-z-_/\s]+)\s*(?:(!?=)\s*(.+))?$#i', $rule, $match)) {
                 dbglog('Wrong gitlab rule format '.$rule.'. Ignoring.');
                 continue;
             }
