@@ -54,4 +54,34 @@ class Gitlab extends AbstractOAuth2Base
     {
         return static::AUTHORIZATION_METHOD_HEADER_BEARER;
     }
+
+    /**
+     * Logout from GitLab
+     *
+     * @return void
+     * @throws \OAuth\Common\Exception\Exception
+     */
+    public function logout()
+    {
+        global $ID;
+
+        $plugin = plugin_load('helper', 'oauthgitlab');
+
+        $token = $this->getStorage()->retrieveAccessToken($this->service());
+
+        $parameters = [
+            'client_id' => $this->credentials->getConsumerId(),
+            'client_secret' => $this->credentials->getConsumerSecret(),
+            'token' => $token
+        ];
+
+        $this->httpClient->retrieveResponse(
+            new Uri($plugin->getConf('url').'/oauth/revoke'),
+            $parameters,
+            $this->getExtraOAuthHeaders()
+        );
+
+        $parameters = array();
+        send_redirect(wl($ID, $parameters, true, '&'));
+    }
 }

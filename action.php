@@ -40,7 +40,7 @@ class action_plugin_oauthgitlab extends \dokuwiki\plugin\oauth\Adapter
     /** @inheritDoc */
     public function getScopes()
     {
-        return array('read_user');
+        return array('read_user','api');
     }
 
     /** @inheritDoc */
@@ -98,9 +98,9 @@ class action_plugin_oauthgitlab extends \dokuwiki\plugin\oauth\Adapter
     public function checkMatchRules() {
         
         /** @var helper_plugin_oauth $hlp */
-        $hlp     = plugin_load('helper', 'oauth');
+        $hlp     = plugin_load('helper', 'oauthgitlab');
         
-        if (!$rules = trim($hlp->getConf('gitlab-rules'))) {
+        if (!$rules = trim($hlp->getConf('rules'))) {
             return true;
         }
         
@@ -119,7 +119,7 @@ class action_plugin_oauthgitlab extends \dokuwiki\plugin\oauth\Adapter
             }
             
             // ns/key/subkey/subsubkey.. [ (!=|=) value ]
-            if (!preg_match('#^\s*([a-z-_]+)/([a-z-_/]+)\s*(?:(!?=)\s*(.+))?$#i', $rule, $match)) {
+            if (!preg_match('#^\s*([a-z-_]+)/([a-z-_/\s]+)\s*(?:(!?=)\s*(.+))?$#i', $rule, $match)) {
                 dbglog('Wrong gitlab rule format '.$rule.'. Ignoring.');
                 continue;
             }
@@ -171,6 +171,17 @@ class action_plugin_oauthgitlab extends \dokuwiki\plugin\oauth\Adapter
         }
         
         return $this->checkMatchRules();
+    }
+
+    /**
+     * @inheritdoc
+     * @throws \OAuth\Common\Exception\Exception
+     */
+    public function logout()
+    {
+        /** @var Gitlab */
+        $oauth = $this->getOAuthService();
+        $oauth->logout();
     }
 }
 
