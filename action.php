@@ -98,9 +98,9 @@ class action_plugin_oauthgitlab extends \dokuwiki\plugin\oauth\Adapter
     public function checkMatchRules() {
         
         /** @var helper_plugin_oauth $hlp */
-        $hlp     = plugin_load('helper', 'oauth');
+        $hlp     = plugin_load('helper', 'oauthgitlab');
         
-        if (!$rules = trim($hlp->getConf('gitlab-rules'))) {
+        if (!$rules = trim($hlp->getConf('rules'))) {
             return true;
         }
         
